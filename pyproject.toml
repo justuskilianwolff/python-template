@@ -3,11 +3,20 @@ name = "python-template"
 version = "0.1.0"
 description = "Add your description here"
 authors = [
-    { name = "Justus Kilian Wolff", email = "moin@justuskilianwolff.com" }
+    { name = "Justus Kilian Wolff", email = "moin@justuskilianwolff.com" },
 ]
 dependencies = []
 readme = "README.md"
 requires-python = ">= 3.8"
+
+[project.optional-dependencies]
+codequality = [
+    "ruff>=0.4.2",
+    "pytest>=8.0.2",
+    "coverage>=7.4.2",
+    "vulture>=2.11",
+    "pylint>=3.1.0",
+]
 
 [build-system]
 requires = ["hatchling"]
@@ -15,13 +24,7 @@ build-backend = "hatchling.build"
 
 [tool.rye]
 managed = true
-dev-dependencies = [
-    "ruff>=0.4.5",
-    "coverage>=7.5.2",
-    "pytest>=8.2.1",
-    "vulture>=2.11",
-    "pylint>=3.2.2",
-]
+dev-dependencies = []
 
 [tool.hatch.metadata]
 allow-direct-references = true
@@ -60,7 +63,7 @@ disable = [
     "R0903", # too few public methods
 ]
 ignore-paths = [".venv", "test[^_]*py"]
-recursive="y"
+recursive = "y"
 
 [tool.vulture]
 exclude = [".venv", "tests"]

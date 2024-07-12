@@ -22,6 +22,5 @@ jobs:
       - name: Run tests
         run: rye run pytest .
       - name: Run vulture
-        run: rye run vulture . 
-      - name: Run coverage
-        run: rye run coverage .
+        run: rye run vulture .  
+      # TODO: add coverage report

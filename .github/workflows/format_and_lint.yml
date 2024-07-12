@@ -1,0 +1,21 @@
+name: Format and run tests
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Add rye
+        uses: eifinger/setup-rye@v4
+        with:
+          version: "latest"
+          enable-cache: true
+      - name: Sync dependencies
+        run: rye sync --features formatting --no-dev
+      - name: Lint and format
+        run: |
+          rye lint --fix
+          rye fmt

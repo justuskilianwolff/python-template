@@ -1,22 +1,32 @@
 {
-  "editor.formatOnSave": true, // Enable auto-formatting on save
-  "editor.formatOnPaste": false, // Disable auto-formatting on paste
-  "notebook.formatOnCellExecution": true, // Enable auto-formatting on cell execution for jupyter notebooks
-  "notebook.formatOnSave.enabled": true, // Enable auto-formatting on save for jupyter notebooks
   "files.autoSave": "afterDelay", // Enable auto-save after a delay
   "files.autoSaveDelay": 1000, // Adjust the delay as needed, in milliseconds
+  // formatting settings
   "editor.defaultFormatter": "charliermarsh.ruff",
   "[jsonc]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "[yaml]": {
+  "[yaml,yml]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
+  "editor.formatOnSave": true, // Enable auto-formatting on save
+  "editor.formatOnPaste": false, // Disable auto-formatting on paste
+  "notebook.formatOnCellExecution": true, // Enable auto-formatting on cell execution for jupyter notebooks
+  "notebook.formatOnSave.enabled": true, // Enable auto-formatting on save for jupyter notebooks
   "editor.codeActionsOnSave": {
     "source.fixAll": "explicit",
     "source.organizeImports": "explicit"
   },
-  "todo-tree.general.tags": ["TODO", "FIXME", "THINK", "BUG", "DISCUSS"],
+  // todo tree settings
+  "todo-tree.general.tags": [
+    "TODO",
+    "FIXME",
+    "THINK",
+    "BUG",
+    "DISCUSS",
+    "CHECK",
+    "UPDATE"
+  ],
   "todo-tree.highlights.customHighlight": {
     "THINK": {
       "icon": "light-bulb",
@@ -26,6 +36,16 @@
     "DISCUSS": {
       "icon": "comment",
       "foreground": "black",
+      "background": "gray"
+    },
+    "CHECK": {
+      "icon": "check",
+      "foreground": "green",
+      "background": "gray"
+    },
+    "UPDATE": {
+      "icon": "sync",
+      "foreground": "blue",
       "background": "gray"
     }
   }

@@ -14,8 +14,14 @@ jobs:
           version: "latest"
           enable-cache: true
       - name: Sync dependencies
-        run: rye sync --features formatting --no-dev
+        run: rye sync --features codequality --no-dev
       - name: Lint and format
         run: |
           rye lint --fix
           rye fmt
+      - name: Run tests
+        run: rye run pytest .
+      - name: Run vulture
+        run: rye run vulture . 
+      - name: Run coverage
+        run: rye run coverage .

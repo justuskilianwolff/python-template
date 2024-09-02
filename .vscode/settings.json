@@ -1,26 +1,33 @@
 {
-  "files.autoSave": "afterDelay", // Enable auto-save after a delay
-  "files.autoSaveDelay": 1000, // Adjust the delay as needed, in milliseconds
-  // formatting settings
+  // formatting
+  "editor.formatOnSave": true,
+  "editor.formatOnPaste": false,
+  "notebook.formatOnCellExecution": true,
+  "notebook.formatOnSave.enabled": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "explicit",
+    "source.organizeImports": "explicit"
+  },
+
+  // default formatters
   "editor.defaultFormatter": "charliermarsh.ruff",
   "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[yaml,yml]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[toml]": {
     "editor.defaultFormatter": "tamasfe.even-better-toml"
   },
-  "[yaml,yml]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "editor.formatOnSave": true, // Enable auto-formatting on save
-  "editor.formatOnPaste": false, // Disable auto-formatting on paste
-  "notebook.formatOnCellExecution": true, // Enable auto-formatting on cell execution for jupyter notebooks
-  "notebook.formatOnSave.enabled": true, // Enable auto-formatting on save for jupyter notebooks
-  "editor.codeActionsOnSave": {
-    "source.fixAll": "explicit",
-    "source.organizeImports": "explicit"
-  },
-  // todo tree settings
+
+  // python
+  "python.analysis.typeCheckingMode": "basic",
+  "python.testing.pytestArgs": ["tests"],
+  "python.testing.unittestEnabled": false,
+  "python.testing.pytestEnabled": true,
+
+  // todo tree
   "todo-tree.general.tags": [
     "TODO",
     "FIXME",
@@ -28,7 +35,8 @@
     "BUG",
     "DISCUSS",
     "CHECK",
-    "UPDATE"
+    "UPDATE",
+    "IMPROVE"
   ],
   "todo-tree.highlights.customHighlight": {
     "THINK": {
@@ -49,6 +57,11 @@
     "UPDATE": {
       "icon": "sync",
       "foreground": "blue",
+      "background": "gray"
+    },
+    "IMPROVE": {
+      "icon": "star",
+      "foreground": "yellow",
       "background": "gray"
     }
   }

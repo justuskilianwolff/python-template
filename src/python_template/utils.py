@@ -32,5 +32,16 @@ def get_env_variable(name: str) -> str:
     if value is None:
         raise ValueError(f"Environment variable {name} is not set.")
     else:
-        logger.debug(f"Environment variable {name} has value {value[:min(10, len(value))]}")
+        len_value = len(value)
+
+        if len_value > 10:
+            show_n_chars = 5
+        elif len_value > 5:
+            show_n_chars = 1
+        else:
+            show_n_chars = 0
+
+        printed_value = value[:show_n_chars] + "*" * (len_value - show_n_chars)
+
+        logger.debug(f"Environment variable {name} has value {printed_value}")
     return value

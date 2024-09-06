@@ -37,7 +37,7 @@ line-length = 120
 respect-gitignore = false
 src = ["src"]
 extend-include = ["*.ipynb"]
-exclude = ["miscellaneous/autoencoders/schreyer/KDD_2019_Lab.ipynb", ".venv"]
+exclude = [".venv"]
 
 [tool.ruff.lint]
 extend-select = ["I"] # also sort imports etc

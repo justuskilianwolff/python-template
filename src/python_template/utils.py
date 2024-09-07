@@ -71,8 +71,10 @@ def set_project_name(name: str) -> None:
                 f.write(content)
 
             # move the file to the new name
-            new_file_path = file_path
-            for old, new in mapping.items():
-                new_file_path = new_file_path.replace(old, new)
+            # TODO: Fix this
+            # new_file_path = file_path
+            # for old, new in mapping.items():
+            #     new_file_path = new_file_path.replace(old, new)
 
-            os.rename(file_path, new_file_path)
+            # if os.path.exists(new_file_path):
+            #     os.rename(file_path, new_file_path)

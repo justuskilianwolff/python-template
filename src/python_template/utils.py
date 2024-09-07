@@ -45,3 +45,29 @@ def get_env_variable(name: str) -> str:
 
         logger.debug(f"Environment variable {name} has value {printed_value}")
     return value
+
+
+def set_project_name(name: str) -> None:
+    """
+    Set the project name for the files and in the file content to not manually change from the template.
+    """
+
+    mapping = {"python-template": name, "python_template": name.replace("-", "_")}
+
+    for root, _, files in os.walk("."):
+
+        # skip all hidden directories
+        if "/." in root:
+            continue
+
+
+        for file in files:
+            file_path = os.path.join(root, file)
+            with open(file_path, "r") as f:
+                content = f.read()
+
+            for old, new in mapping.items():
+                content = content.replace(old, new)
+
+            with open(file_path, "w") as f:
+                f.write(content)

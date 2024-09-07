@@ -18,7 +18,7 @@ jobs:
           version: "latest"
           enable-cache: true
       - name: Sync dependencies
-        run: rye sync --features codequality --no-dev
+        run: rye sync
       - name: Lint and format
         run: |
           rye lint --fix

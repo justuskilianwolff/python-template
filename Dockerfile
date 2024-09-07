@@ -1,3 +1,4 @@
+# FROM ghcr.io/justuskilianwolff/rye-image:latest
 FROM ubuntu:22.04
 
 # set bash as shell

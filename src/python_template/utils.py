@@ -55,15 +55,13 @@ def set_project_name(name: str) -> None:
     mapping = {"python-template": name, "python_template": name.replace("-", "_")}
 
     for root, _, files in os.walk("."):
-
         # skip all hidden directories
         if "/." in root:
             continue
 
-
         for file in files:
             file_path = os.path.join(root, file)
-            with open(file_path, "r") as f:
+            with open(file_path, "r", errors="ignore") as f:
                 content = f.read()
 
             for old, new in mapping.items():
@@ -71,3 +69,10 @@ def set_project_name(name: str) -> None:
 
             with open(file_path, "w") as f:
                 f.write(content)
+
+            # move the file to the new name
+            new_file_path = file_path
+            for old, new in mapping.items():
+                new_file_path = new_file_path.replace(old, new)
+
+            os.rename(file_path, new_file_path)

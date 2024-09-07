@@ -54,6 +54,8 @@ def set_project_name(name: str) -> None:
 
     mapping = {"python-template": name, "python_template": name.replace("-", "_")}
 
+    dirs_to_remove = set()
+
     for root, _, files in os.walk("."):
         # skip all hidden directories
         if "/." in root:
@@ -70,11 +72,24 @@ def set_project_name(name: str) -> None:
             with open(file_path, "w") as f:
                 f.write(content)
 
-            # move the file to the new name
-            # TODO: Fix this
-            # new_file_path = file_path
-            # for old, new in mapping.items():
-            #     new_file_path = new_file_path.replace(old, new)
+            # check if file needs moving
+            if any(key in file_path for key in mapping.keys()):
+                # move the file to the new name
+                new_file_path = file_path
+                for old, new in mapping.items():
+                    new_file_path = new_file_path.replace(old, new)
 
-            # if os.path.exists(new_file_path):
-            #     os.rename(file_path, new_file_path)
+                # create dirs if not exist
+                dirs_new = os.path.dirname(new_file_path)
+                os.makedirs(dirs_new, exist_ok=True)
+
+                # move file
+                os.rename(file_path, new_file_path)
+
+                # delete old dirs
+                dirs_old = os.path.dirname(file_path)
+                dirs_to_remove.add(dirs_old)
+
+    # remove old dirs
+    for dir_to_remove in dirs_to_remove:
+        os.removedirs(dir_to_remove)

@@ -39,6 +39,7 @@ exclude = [".venv"]
 
 [tool.ruff.lint]
 extend-select = ["I"] # also sort imports etc
+ignore = ["F401"]
 
 [tool.pytest.ini_options]
 log_cli = true

@@ -31,6 +31,7 @@
   "python.testing.pytestEnabled": true,
 
   // todo tree
+
   "todo-tree.general.tags": [
     "TODO",
     "FIXME",
@@ -39,33 +40,64 @@
     "DISCUSS",
     "CHECK",
     "UPDATE",
-    "IMPROVE"
+    "IMPROVE",
+    "REMOVE"
   ],
+
   "todo-tree.highlights.customHighlight": {
+    "TODO": {
+      "icon": "checklist",
+      "foreground": "#ffffff",
+      "background": "#ff8800",
+      "iconColour": "#ff8800"
+    },
+    "FIXME": {
+      "icon": "tools",
+      "foreground": "#ffffff",
+      "background": "#ff0000",
+      "iconColour": "#ff0000"
+    },
     "THINK": {
       "icon": "light-bulb",
-      "foreground": "blue",
-      "background": "gray"
+      "foreground": "#ffffff",
+      "background": "#9933cc",
+      "iconColour": "#9933cc"
+    },
+    "BUG": {
+      "icon": "bug",
+      "foreground": "#ffffff",
+      "background": "#ee4444",
+      "iconColour": "#ee4444"
     },
     "DISCUSS": {
-      "icon": "comment",
-      "foreground": "black",
-      "background": "gray"
+      "icon": "comment-discussion",
+      "foreground": "#ffffff",
+      "background": "#33aadd",
+      "iconColour": "#33aadd"
     },
     "CHECK": {
-      "icon": "check",
-      "foreground": "green",
-      "background": "gray"
+      "icon": "verified",
+      "foreground": "#ffffff",
+      "background": "#00cc66",
+      "iconColour": "#00cc66"
     },
     "UPDATE": {
       "icon": "sync",
-      "foreground": "blue",
-      "background": "gray"
+      "foreground": "#ffffff",
+      "background": "#3366ff",
+      "iconColour": "#3366ff"
     },
     "IMPROVE": {
       "icon": "star",
-      "foreground": "yellow",
-      "background": "gray"
+      "foreground": "#000000",
+      "background": "#ffdd33",
+      "iconColour": "#ffdd33"
+    },
+    "REMOVE": {
+      "icon": "trash",
+      "foreground": "#ffffff",
+      "background": "#ff3366",
+      "iconColour": "#ff3366"
     }
   }
 }

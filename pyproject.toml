@@ -5,7 +5,7 @@ description = "Add your description here"
 readme = "README.md"
 authors = [{ name = "Justus Kilian Wolff", email = "justus.wolff@web.de" }]
 requires-python = ">=3.11.9"
-dependencies = []
+dependencies = ["python-dotenv>=1.0.1"]
 
 [project.scripts]
 python-template = "python_template:main"
@@ -21,7 +21,6 @@ dev = [
     "coverage>=7.4.2",
     "vulture>=2.11",
     "pylint>=3.1.0",
-    "python-dotenv>=1.0.1",
     "ipykernel>=6.29.5",
 ]
 

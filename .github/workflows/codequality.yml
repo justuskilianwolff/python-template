@@ -14,24 +14,23 @@ jobs:
         run: |
           git config --global user.name 'GitHub Actions'
           git config --global user.email 'actions@github.com'
-      - name: Add rye
-        uses: eifinger/setup-rye@v4
+      - name: Install uv
+        uses: astral-sh/setup-uv@v6
         with:
-          version: "latest"
-          enable-cache: true
+          version: "0.7.1"
       - name: Sync dependencies
-        run: rye sync
+        run: uv sync
       - name: Lint and format
         run: |
-          rye lint --fix
-          rye fmt
+          uv run ruff check --fix
+          uv run ruff format
       - name: Commit and push changes
         run: |
           git add .
           git commit -m "Apply linting and formatting" || echo "No changes to commit"
           git push
       - name: Run tests
-        run: rye run pytest .
+        run: uv run pytest .
       - name: Run vulture
-        run: rye run vulture .
+        run: uv run vulture .
       # TODO: add coverage report

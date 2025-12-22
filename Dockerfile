@@ -1,18 +1,33 @@
-# FROM ghcr.io/justuskilianwolff/rye-image:latest
-FROM ubuntu:22.04
+# STAGE 1: Build the application
+FROM debian:bookworm-slim AS builder
 
-# set bash as shell
-SHELL ["/bin/bash", "-c"]
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /bin/
 
-RUN apt-get update && apt-get upgrade -y && apt-get install -y curl && \
-    curl -sSf https://rye.astral.sh/get | RYE_TOOLCHAIN_VERSION="cpython@3.11.9" RYE_INSTALL_OPTION="--yes" bash
+# https://github.com/astral-sh/uv-docker-example/blob/main/standalone.Dockerfile
+# compile bytecode: pre-compile .py to .pyc for faster startup (no runtime compilation)
+# no default groups: don't install groups marked as default in [tool.uv] (you'll specify explicitly with --group)
+# frozen: sync without updating uv.lock (fail if lock is out of date, ensures reproducible builds)
+# link mode: copy files instead of hardlinks (safer for containers, avoids issues with layered filesystems)
+# install dir: where uv installs its managed python (keeps it in a predictable location for COPY --from)
+# python preference: only use uv-managed python, never system python (ensures consistency)
+ENV UV_COMPILE_BYTECODE=true
+ENV UV_NO_DEFAULT_GROUPS=true
+ENV UV_FROZEN=true
+ENV UV_LINK_MODE=copy
+ENV UV_PYTHON_INSTALL_DIR=/python
+ENV UV_PYTHON_PREFERENCE=only-managed
 
-# Set environment variables
-ENV PATH="/root/.rye/shims:${PATH}"
-ENV RYE_HOME="/root/.rye"
+# immediately flush python output (for logging)
+ENV PYTHONUNBUFFERED=1
 
-# Verify Rye installation
-RUN rye --version
+# Copy python version and install
+COPY .python-version .
+RUN uv python install
 
-# Set the default command to /bin/bash so you can enter the shell
-CMD ["/bin/bash"]
+# Copy project files needed by all builds
+WORKDIR /app
+COPY pyproject.toml uv.lock README.md ./
+
+# sync dependency group 
+RUN --mount=type=cache,target=/root/.cache/uv \
+    uv sync --no-install-project
